@@ -56,7 +56,7 @@ import requests
 import loguru
 
 loguru.logger.remove()
-loguru.logger.add(sys.stdout, format='[{time:HH:mm:ss}] <lvl>{message}</lvl>', level='INFO')
+# loguru.logger.add(sys.stdout, format='[{time:HH:mm:ss}] <lvl>{message}</lvl>', level='INFO')
 loguru.logger.opt(colors=True)
 
 
@@ -167,7 +167,7 @@ class TranslatorSeverRegion(Tse):
         try:
             try:
                 data = eval(requests.get(self.get_addr_url, headers=_headers_fn(self.get_addr_url)).text[9:-2])
-                sys.stderr.write(f'Using state {data.get("stateName")} server backend.\n')
+                # sys.stderr.write(f'Using state {data.get("stateName")} server backend.\n')
                 return {'countryCode': data.get('country')}
             except requests.exceptions.Timeout:
                 ip_address = requests.get(self.get_ip_url, headers=_headers_fn(self.get_ip_url)).json()['origin']
@@ -180,7 +180,7 @@ class TranslatorSeverRegion(Tse):
         except:
             warnings.warn('Unable to find server backend.\n')
             country = input('Please input your server region need to visit:\neg: [England, China, ...]\n')
-            sys.stderr.write(f'Using country {country} server backend.\n')
+            # sys.stderr.write(f'Using country {country} server backend.\n')
             return {'countryCode': 'CN' if country == 'China' else 'EN'}
 
 
